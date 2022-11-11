@@ -1,0 +1,80 @@
+{
+    "required_api_version": "^2.0.0",
+    "name": "List Keywords",
+    "description": "Lists keywords for every install extension. Useful if you can't remember all of them.",
+    "developer_name": "dynobo",
+    "icon": "images/icon.svg",
+    "options": {
+        "query_debounce": 0.1
+    },
+    "preferences": [
+        {
+            "id": "lskw_kw",
+            "type": "keyword",
+            "name": "List Keywords",
+            "default_value": "kw"
+        },
+        {
+            "id": "max_results",
+            "type": "input",
+            "name": "Maximum number of results",
+            "default_value": "8",
+            "description": "In case 'Result item style' is 'Compact', twice as many results are shown!"
+        },
+        {
+            "id": "item_style",
+            "type": "select",
+            "options": [
+                {
+                    "value": "default",
+                    "text": "Default"
+                },
+                {
+                    "value": "compact",
+                    "text": "Compact - half the size, twice as many results)"
+                }
+            ],
+            "name": "Result item style",
+            "description": "Set the size of this extension's results.",
+            "default_value": "default"
+        },
+        {
+            "id": "multiple_mode",
+            "type": "select",
+            "options": [
+                {
+                    "value": "collapse",
+                    "text": "Collapse entries for extension with mulitple keywords"
+                },
+                {
+                    "value": "show_all",
+                    "text": "Show all keywords of all extensions"
+                },
+                {
+                    "value": "show_first",
+                    "text": "Show the first keyword of every extension"
+                }
+            ],
+            "name": "Handle multiple keywords",
+            "description": "Useful if some extensions provides more than one keyword",
+            "default_value": "collapse"
+        },
+        {
+            "id": "include_shortcuts",
+            "type": "select",
+            "options": [
+                {
+                    "value": "True",
+                    "text": "Yes"
+                },
+                {
+                    "value": "False",
+                    "text": "No"
+                }
+            ],
+            "name": "Include shortcuts",
+            "description": "Show also keywords for Ulauncher 'Shortcuts'.",
+            "default_value": "True"
+        }
+    ]
+}

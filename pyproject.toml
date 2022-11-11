@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "ulauncher-list-keywords"
+version = "0.2.0"
+description = "Extension for Ulauncher"
+authors = ["dynobo <dynobo@mailbox.org>"]
+license = "MIT"
+readme = "README.md"
+packages = [{ include = "list_keywords" }]
+
+[tool.poetry.dependencies]
+python = "^3.7.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+pre-commit = "^2.20.0"
+autoflake = "^1.7.7"
+ruff = "^0.0.111"
+pylint = "^2.15.5"
+mdformat = "^0.7.16"
+pytest = "^7.2.0"
+
+[tool.ruff]
+line-length = 88
+exclude = [".venv", ".git", "images"]
+target-version = "py37"
+
+[tool.isort]
+profile = "black"
+
+
+[tool.pylint.master]
+ignored-modules = ["ulauncher"]
+load-plugins = ["pylint_pytest"]
+jobs = 3
+
+[tool.pylint.'MESSAGES CONTROL']
+load-plugins = "pylint.extensions.mccabe"
+disable = [
+    "fixme",
+    "invalid-name",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "too-few-public-methods",
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

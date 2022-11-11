@@ -1,0 +1,69 @@
+# See https://pre-commit.com/ for usage and config
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+  - repo: local
+    hooks:
+      - id: mdformat
+        name: mdformat
+        stages: [commit]
+        language: system
+        entry: poetry run mdformat --wrap 88
+        types: [markdown]
+
+      - id: autoflake
+        name: autoflake
+        entry: poetry run autoflake
+        language: system
+        args:
+          - --recursive
+          - --in-place
+          - --remove-all-unused-imports
+          - --remove-unused-variables
+          - --expand-star-imports
+          - --exclude
+          - __init__.py
+          - --remove-duplicate-keys
+        types: [python]
+
+      - id: isort
+        name: isort
+        stages: [commit]
+        language: system
+        entry: poetry run isort
+        types: [python]
+
+      - id: black
+        name: black
+        stages: [commit]
+        language: system
+        entry: poetry run black
+        types: [python]
+
+      - id: pylint
+        name: pylint
+        stages: [commit]
+        language: system
+        entry: poetry run pylint
+        types: [python]
+
+      - id: ruff
+        name: ruff
+        stages: [commit]
+        language: system
+        entry: poetry run ruff
+        types: [python]
+
+      - id: pytest
+        name: pytest
+        stages: [commit]
+        language: system
+        entry: poetry run pytest
+        types: [python]
+        pass_filenames: false

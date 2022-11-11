@@ -1,0 +1,46 @@
+# Infos on current github runners:
+# https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners#about-github-hosted-runners
+
+name: Build
+on: [pull_request, push]
+
+concurrency:
+  group: cicd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test - Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      # SETUP ENVIRONMENT
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: "1.2.2"
+      - name: Poetry install
+        run: poetry install
+
+      # PERFORM TESTS
+      - name: Pylint
+        if: always()
+        run: poetry run pylint main.py ./list_keywords ./tests
+      - name: Ruff
+        if: always()
+        run: poetry run ruff .
+      - name: Black
+        if: always()
+        run: poetry run black --check --diff .
+      - name: Isort
+        if: always()
+        run: poetry run isort --check .
+      - name: Pytest
+        if: always()
+        run: poetry run pytest
