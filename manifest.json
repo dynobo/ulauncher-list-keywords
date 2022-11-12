@@ -18,7 +18,7 @@
             "id": "max_results",
             "type": "input",
             "name": "Maximum number of results",
-            "default_value": "8",
+            "default_value": "9",
             "description": "In case 'Result item style' is 'Compact', twice as many results are shown!"
         },
         {
@@ -31,7 +31,7 @@
                 },
                 {
                     "value": "compact",
-                    "text": "Compact - half the size, twice as many results)"
+                    "text": "Compact - half the size, twice as many results"
                 }
             ],
             "name": "Result item style",
